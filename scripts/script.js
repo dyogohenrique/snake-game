@@ -56,23 +56,6 @@ const drawFood = () => {
     ctx.shadowBlur = 0;
 }
 
-// const drawSnake = () => {
-//     const border = 5;
-
-//     ctx.fillStyle = "#2fa12f";
-//     ctx.fillRect(snake[0].x, snake[0].y, size, size);
-
-//     snake.forEach((position, index) => {
-
-//         if (index == snake.length - 1) {
-//             ctx.fillStyle = "#237323"
-//         }
-
-//         ctx.fillRect(position.x, position.y, size, size);
-//     });
-
-// }
-
 const drawSnake = () => {
     const border = 3;
 
@@ -163,6 +146,12 @@ const checkEat = () => {
         food.x = x;
         food.y = y;
         food.color = randomColor();
+
+
+        // Aumenta a velocidade a cada 50 pontos
+        if (+score.innerText % 50 === 0) {
+            speed -= 10;
+        }
         
     }
 }
@@ -194,6 +183,8 @@ const gameOver = () => {
     canvas.style.filter = "blur(2px)";
 }
 
+let speed = 300;
+
 const gameLoop = () => {
     console.log(food.x, food.y);
 
@@ -209,7 +200,7 @@ const gameLoop = () => {
 
     loopId = setTimeout(() => {
         gameLoop();
-    }, 300);
+    }, speed);
 }
 
 gameLoop();
@@ -237,4 +228,5 @@ buttonReplay.addEventListener("click", () => {
     score.innerText = "00";
     menu.style.display = "none";
     canvas.style.filter = "none";
+    speed = 300;
 })

@@ -16,25 +16,32 @@
     <title>Snake Game</title>
 </head>
 <body>
+    <header></header>
 
-    <div class="score">
-        score: <span class="score--value">00</span>
-    </div>
+    <main>
+        <div class="score">
+            score: <span class="score--value">00</span>
+        </div>
+        <div class="menu--screen">
+            <span class="game--over">Fim de Jogo!</span>
+            <span class="final--score">Score: <span>00</span></span>
+            <button class="btn--replay">
+                <span class="material-symbols-outlined">
+                restart_alt
+                </span>
+                Jogar novamente</button>
+        </div>
+        
+        <canvas width="600" height="600"></canvas>
+    </main>
 
-    <div class="menu--screen">
-        <span class="game--over">Fim de Jogo!</span>
-        <span class="final--score">Score: <span>00</span></span>
-
-        <button class="btn--replay">
-            <span class="material-symbols-outlined">
-            restart_alt
-            </span>
-            Jogar novamente</button>
-    </div>
     
-    <canvas width="600" height="600"></canvas>
+    <footer>
+        <p>site feito por dybaro</p>
 
+    </footer>
+    
+    
     <script src="scripts/script.js"></script>
-
 </body>
 </html>
