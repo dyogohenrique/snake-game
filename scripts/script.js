@@ -7,6 +7,7 @@ const menu = document.querySelector('.menu--screen');
 const buttonReplay = document.querySelector('.btn--replay');
 
 const pointAudio = new Audio('../assets/point.wav');
+const loserAudio = new Audio('../assets/loser.wav')
 
 const size = 30;
 
@@ -29,9 +30,9 @@ const randomPosition = () => {
 }
 
 const randomColor = () => {
-    const red = randomNumber(0, 255);
-    const green = randomNumber(0, 255);
-    const blue = randomNumber(0, 255);
+    const red = randomNumber(70, 220);
+    const green = randomNumber(70, 220);
+    const blue = randomNumber(70, 220);
 
     return `rgb(${red}, ${green}, ${blue})`
 }
@@ -55,19 +56,49 @@ const drawFood = () => {
     ctx.shadowBlur = 0;
 }
 
+// const drawSnake = () => {
+//     const border = 5;
+
+//     ctx.fillStyle = "#2fa12f";
+//     ctx.fillRect(snake[0].x, snake[0].y, size, size);
+
+//     snake.forEach((position, index) => {
+
+//         if (index == snake.length - 1) {
+//             ctx.fillStyle = "#237323"
+//         }
+
+//         ctx.fillRect(position.x, position.y, size, size);
+//     });
+
+// }
+
 const drawSnake = () => {
-    ctx.fillStyle = "#ddd";
-    ctx.fillRect(snake[0].x, snake[0].y, size, size);
+    const border = 3;
 
     snake.forEach((position, index) => {
+        // Desenha o corpo da cobra
+        if (index < snake.length - 1) {
+            ctx.fillStyle = "#2fa12f"; 
+            ctx.fillRect(position.x, position.y, size, size);
 
-        if (index == snake.length - 1) {
-            ctx.fillStyle = "gray"
+            // Desenha a borda do corpo da cobra
+            ctx.fillStyle = "#237323"; 
+            ctx.fillRect(
+                position.x + border,
+                position.y + border, 
+                size - border * 2,
+                size - border * 2 
+            );
+        } else {
+            // Desenha a cabeça da cobra
+            ctx.fillStyle = "#2fa12f";
+            ctx.fillRect(position.x, position.y, size, size);
         }
-
-        ctx.fillRect(position.x, position.y, size, size);
     });
 }
+
+
 
 const moveSnake = () => {
     if (!direction) return;
@@ -148,12 +179,15 @@ const checkCollision = () => {
     })
 
     if (wallCollision || selfCollision) {
+        loserAudio.play();
         gameOver();
     }
 }
 
 const gameOver = () => {
     direction = undefined
+
+    snake = [initialPosition];
 
     menu.style.display = "flex";
     finalScore.innerText = score.innerText;
@@ -203,5 +237,4 @@ buttonReplay.addEventListener("click", () => {
     score.innerText = "00";
     menu.style.display = "none";
     canvas.style.filter = "none";
-    snake = [initialPosition];
 })
