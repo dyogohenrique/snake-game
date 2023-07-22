@@ -1,8 +1,5 @@
-const pointAudioBlob = new Blob([require("../assets/point.wav")], { type: "audio/wav" });
-const pointAudio = new Audio(URL.createObjectURL(pointAudioBlob));
-
-const loserAudioBlob = new Blob([require("../assets/loser.wav")], { type: "audio/wav" });
-const loserAudio = new Audio(URL.createObjectURL(loserAudioBlob));
+const pointAudio = new Audio('../assets/point.wav');
+const loserAudio = new Audio('../assets/loser.wav');
 
 
 export const playPoint = () => {
